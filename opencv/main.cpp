@@ -2,6 +2,7 @@
 //#include <algorithm>
 #include <vector>
 #include<string>
+#include<map>
 
 using namespace std;
 
@@ -46,20 +47,48 @@ void merge_Sort(int *data, int l, int r) {
 	}
 }
 
+
+//Leetcode两数之和
+vector<int> twoSum(vector<int> &nums, int target) {
+	vector<int> res;
+	map<int, int> tmp;
+	for (int i = 0; i < nums.size(); i++) {
+		tmp[nums[i]] = i;
+	}
+	for (int i = 0; i < nums.size(); i++) {
+		if (tmp.count(target - nums[i]) != 0 && tmp[target - nums[i]] != i) {
+			res.push_back(i);
+			res.push_back(tmp[target - nums[i]]);
+			break;
+		}
+	}
+	return res;
+}
+
 int main() {
-	int data[6] = { 3,42,1,5,2,8 };
-	for (int i = 0; i < 6; i++) {
-		cout << data[i] << " ";
+
+	//Map<>的使用
+
+	//int data[6] = { 3,42,1,5,2,8 };
+	//for (int i = 0; i < 6; i++) {
+	//	cout << data[i] << " ";
+	//}
+	//cout << endl;
+
+	//merge_Sort(data, 0, 5);
+	//for (int i = 0; i < 6; i++) {
+	//	cout << data[i] << " ";
+	//}
+	//cout << endl;	
+	//
+
+	vector<int> nums = { 2,4,5,7,9 };
+	int target = 12;
+	vector<int> res = twoSum(nums, target);
+	for (int i = 0; i < res.size(); i++) {
+		cout << res[i] << " ";
 	}
 	cout << endl;
-
-	merge_Sort(data, 0, 5);
-	for (int i = 0; i < 6; i++) {
-		cout << data[i] << " ";
-	}
-	cout << endl;	
-	
-
 	system("pause");
 	return 0;
 }
